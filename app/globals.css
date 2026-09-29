@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f6f1e7;
+  --ink: #1b1a17;
+  --muted: #6b665c;
+  --surface: #fffdf8;
+  --green: #1d8348;
+  --blue: #2359c4;
+  --red: #c8322b;
+  --on-color: #ffffff;
+}
+
+/* Pages that render a .theme-light element (V3) keep the light palette in dark mode. */
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(.theme-light)) {
+    --paper: #151412;
+    --ink: #f3eee4;
+    --muted: #a39d91;
+    --surface: #1f1d1a;
+    --green: #3fb071;
+    --blue: #5b8cf0;
+    --red: #ec5f55;
+    --on-color: #151412;
+  }
+}
+
+/* V4: plain white instead of cream. Also carries .theme-light, so the dark palette never applies. */
+:root:has(.theme-white) {
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --ink: #111111;
+  --muted: #666666;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-on-color: var(--on-color);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-bricolage);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Hard-edged "block" look shared by cards, tiles and buttons. */
+.card,
+.tile {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.card {
+  border-radius: 22px;
+}
+.tile {
+  border-radius: 14px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.9rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--ink);
+}
+.btn:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 4px 4px 0 var(--green);
+}
+.btn-primary:hover {
+  box-shadow: 6px 6px 0 var(--green);
+}
+.btn-secondary {
+  background: var(--red);
+  color: var(--on-color);
+}
+.btn-arrow {
+  transition: transform 150ms ease;
+}
+.btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn-arrow {
+    transition: none;
+  }
+}
+
+/* Horizontal rail: first card lines up with the page content, cards bleed off the right edge. */
+.rail {
+  --rail-pad: max(1rem, calc((100vw - 72rem) / 2 + 2rem));
+  padding-inline: var(--rail-pad);
+  scroll-padding-inline: var(--rail-pad);
+  scrollbar-width: none;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: -3px;
+}
+@media (max-width: 639px) {
+  .rail {
+    --rail-pad: 1rem;
+  }
+}
+
+.vendor-card {
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+.vendor-card:hover {
+  transform: translate(-2px, -3px);
+  box-shadow: 7px 8px 0 var(--ink);
+}
+
+.placeholder-card {
+  border: 2px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+  border-radius: 22px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--ink) 4%, transparent) 0 10px,
+    transparent 10px 20px
+  );
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 3rem;
+  padding-inline: 1rem;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: box-shadow 120ms ease;
+}
+.search:focus-within {
+  box-shadow: 3px 3px 0 var(--blue);
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 1.15rem;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    opacity 120ms ease;
+}
+.icon-btn:not(:disabled):hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.icon-btn:not(:disabled):active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+.icon-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vendor-card,
+  .icon-btn,
+  .search {
+    transition: none;
+  }
+}
+
+.path-card {
+  transition:
+    transform 180ms ease,
+    rotate 180ms ease,
+    box-shadow 180ms ease;
+}
+.path-card:hover {
+  transform: translate(-2px, -4px);
+  box-shadow: 8px 9px 0 var(--ink);
+}
+.path-card:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--ink);
+}
+.path-card:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .path-card {
+    transition: none;
+  }
+}
+
+.btn-sm {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.95rem;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.btn-primary.btn-sm {
+  box-shadow: 3px 3px 0 var(--green);
+}
+
+.pace-input {
+  width: 100%;
+  height: 2.75rem;
+  padding-inline: 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+.pace-input:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--plan) 45%, transparent);
+}
+.pace-input[aria-invalid="true"] {
+  border-color: var(--red);
+}
