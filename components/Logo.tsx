@@ -7,7 +7,7 @@ export function Logo() {
         <span className="size-2.5 rounded-[3px] bg-[var(--red)]" />
         <span className="size-2.5 rounded-[3px] bg-ink" />
       </span>
-      <span className="font-display text-xl font-bold tracking-tight">Block Market</span>
+      <span className="font-display text-xl font-bold tracking-tight whitespace-nowrap">Block Market</span>
     </span>
   );
 }

@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Bottom-left is taken by the V1/V2 switch.
+  // Keeps the dev badge clear of the bottom-left corner (the market's mockup switch).
   devIndicators: { position: "bottom-right" },
 };
 

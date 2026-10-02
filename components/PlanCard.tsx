@@ -22,7 +22,7 @@ export function PlanCard({
   plan: Plan;
   now: number | null;
   tilt: number;
-  /** Show the "Check yours" input (V2 only). */
+  /** Show the "Check yours" input. */
   paceCheck?: boolean;
 }) {
   const reduce = useReducedMotion();

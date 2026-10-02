@@ -4,14 +4,14 @@ const PATHS = [
   {
     title: "For buyers",
     blurb: "Order from campus spots for less than menu price.",
-    href: "#",
+    href: "/market",
     color: "var(--green)",
     tilt: "hover:-rotate-1",
   },
   {
     title: "For sellers",
     blurb: "Turn blocks you won't use into cash.",
-    href: "#",
+    href: "/sell",
     color: "var(--blue)",
     tilt: "hover:rotate-1",
   },

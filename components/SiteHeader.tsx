@@ -4,7 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 
-export function SiteHeader() {
+/**
+ * `children` renders at the start of the nav, e.g. the market's cart button.
+ * `tabs` sits in the middle on wider screens and gets its own row on phones.
+ */
+export function SiteHeader({ children, tabs }: { children?: React.ReactNode; tabs?: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -20,12 +24,17 @@ export function SiteHeader() {
         scrolled ? "border-ink bg-paper" : "border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-8">
-        <Link href="/v2" aria-label="Block Market home">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto] items-center gap-x-4 px-4 sm:grid-cols-[1fr_auto_1fr] sm:px-8">
+        <Link href="/" aria-label="Block Market home" className="col-start-1 row-start-1 flex h-16 items-center justify-self-start">
           <Logo />
         </Link>
-        <nav className="flex items-center gap-2 sm:gap-4">
-          <Link href="#" className="rounded-full px-3 py-2 font-semibold hover:bg-ink/5">
+        {tabs && <div className="col-span-2 row-start-2 flex h-13 items-start sm:col-span-1 sm:col-start-2 sm:row-start-1 sm:h-auto">{tabs}</div>}
+        <nav className="col-start-2 row-start-1 flex items-center gap-2 justify-self-end sm:col-start-3 sm:gap-4">
+          {children}
+          <Link
+            href="#"
+            className={`rounded-full px-3 py-2 font-semibold whitespace-nowrap hover:bg-ink/5 ${children ? "max-sm:hidden" : ""}`}
+          >
             Log in
           </Link>
           <Link href="#" className="btn btn-primary btn-sm">

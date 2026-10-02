@@ -68,7 +68,7 @@ export function PaceCheck({ plan, now }: { plan: Plan; now: number | null }) {
             ) : delta > 0 ? (
               <>
                 You&rsquo;re <strong>{blocks(delta)} ahead</strong> of pace.{" "}
-                <Link href="#" className="font-semibold text-[var(--plan)] underline underline-offset-4">
+                <Link href="/sell" className="font-semibold text-[var(--plan)] underline underline-offset-4">
                   Sell the extras →
                 </Link>
               </>

@@ -25,14 +25,6 @@ export function MobileCtaBar() {
     return () => observer.disconnect();
   }, []);
 
-  // Lets the version switch sit above the bar instead of under it.
-  useEffect(() => {
-    document.documentElement.style.setProperty("--cta-offset", show ? "5rem" : "0px");
-    return () => {
-      document.documentElement.style.removeProperty("--cta-offset");
-    };
-  }, [show]);
-
   return (
     <AnimatePresence>
       {show && (
@@ -43,10 +35,10 @@ export function MobileCtaBar() {
           transition={{ type: "spring", stiffness: 380, damping: 34 }}
           className="fixed inset-x-0 bottom-0 z-40 flex gap-3 border-t-2 border-ink bg-paper px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:hidden"
         >
-          <Link href="#" className="btn btn-primary btn-sm flex-1 justify-center">
+          <Link href="/market" className="btn btn-primary btn-sm flex-1 justify-center">
             Order food
           </Link>
-          <Link href="#" className="btn btn-secondary btn-sm flex-1 justify-center">
+          <Link href="/sell" className="btn btn-secondary btn-sm flex-1 justify-center">
             Sell blocks
           </Link>
         </motion.div>
